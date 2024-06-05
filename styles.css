@@ -62,7 +62,7 @@ ul li.checked::before {
   width: 7px;
 }
 
-.close {
+.delete {
   position: absolute;
   right: 0;
   top: 0;
@@ -86,7 +86,7 @@ ul li.checked::before {
   color: white;
 }
 
-.close:hover {
+.delete:hover {
   background-color: #f44336;
   color: white;
 }
@@ -113,6 +113,7 @@ ul li.checked::before {
   font-size: 16px;
   color: black;
 }
+
 
 .addBtn {
   padding: 10px;

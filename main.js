@@ -1,19 +1,17 @@
 const myNodelist = document.getElementsByTagName("LI");
 let i;
 for (i = 0; i < myNodelist.length; i++) {
-  addCloseAndEditButtons(myNodelist[i]);
+  addDeleteAndEditButtons(myNodelist[i]);
 }
 
-function addCloseAndEditButtons(li) {
-  // Create close button
-  const span = document.createElement("SPAN");
-  span.className = "close";
+const addDeleteAndEditButtons = (li) => {
+  const deleteSpan = document.createElement("SPAN");
+  deleteSpan.className = "delete";
   const icon = document.createElement("I");
   icon.className = "fa-solid fa-trash-can";
-  span.appendChild(icon);
-  li.appendChild(span);
+  deleteSpan.appendChild(icon);
+  li.appendChild(deleteSpan);
 
-  // Create edit button
   const editSpan = document.createElement("SPAN");
   editSpan.className = "edit";
   const editIcon = document.createElement("I");
@@ -21,7 +19,7 @@ function addCloseAndEditButtons(li) {
   editSpan.appendChild(editIcon);
   li.appendChild(editSpan);
 
-  span.onclick = function () {
+  deleteSpan.onclick = function () {
     const div = this.parentElement;
     div.style.display = "none";
   };
@@ -40,10 +38,10 @@ function addCloseAndEditButtons(li) {
     div.replaceChild(input, div.firstChild);
 
     // Handle the blur and Enter key events to save the new value
-    input.onblur = function () {
+    input.onblur = () => {
       saveEdit(div, input.value);
     };
-    input.onkeydown = function (e) {
+    input.onkeydown = (e) => {
       if (e.key === "Enter") {
         saveEdit(div, input.value);
       }
@@ -51,16 +49,16 @@ function addCloseAndEditButtons(li) {
 
     input.focus();
   };
-}
+};
 
-function saveEdit(div, newValue) {
+const saveEdit = (div, newValue) => {
   if (newValue.trim() !== "") {
     const newText = document.createTextNode(newValue);
     div.replaceChild(newText, div.firstChild);
   } else {
     alert("You must write something!");
   }
-}
+};
 
 const list = document.querySelector("ul");
 list.addEventListener(
@@ -80,12 +78,14 @@ const newElement = () => {
   li.appendChild(text);
 
   if (inputValue === "") {
+    const inputBar = document.getElementById("myDIV")
+  
     alert("You must write something!");
   } else {
     document.getElementById("myUL").appendChild(li);
     document.getElementById("myInput").value = "";
 
-    addCloseAndEditButtons(li);
+    addDeleteAndEditButtons(li);
   }
 };
 document.getElementById("myInput").addEventListener("keydown", function (e) {
